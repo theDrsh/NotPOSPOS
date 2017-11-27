@@ -1,14 +1,23 @@
+#ifndef ORDER_H
+#define ORDER_H
 #include "IOrder.h"
-#include <string>
-#include <vector>
 
-class order : public IOrder {
+class order : public IOrder
+{
   private:
     std::vector<item> itemList;
-  void addItem(item newItem);
-  std::vector<item> getItems() {return itemList;};
-  double getSubtotal();
-  double getTax();
-  double getTotal();
-  double balance(double amtPaid);
+    double tax;
+    bool closed;
+  public:
+    order();
+    order(double);
+  public:
+    void addItem(item);
+    std::vector <item> getItems();
+    double getSubtotal();
+    double getTax();
+    double getTotal();
+    double balance(double);
 };
+
+#endif

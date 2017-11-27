@@ -1,25 +1,43 @@
 #include "order.h"
 
-void order::addItem(item newItem) {
-    itemList.push_back(newItem);
+order::order() {
+  tax = 0.0725;
+  closed = false;
+}
+
+order::order(double tax) {
+  this->tax = tax;
+  closed = false;
+}
+
+void order::addItem(item i) {
+  if( !closed )
+  {
+    itemList.push_back(i);
+  }
+}
+
+std::vector<item> order::getItems() {
+  return itemList;
 }
 
 double order::getSubtotal() {
-  double sum = 0;
+  double subtotal = 0;
   for(int i = 0; i < itemList.size(); i++) {
-      sum += itemList[i].getPrice();
+    subtotal += itemList[i].getPrice();
   }
-  return sum;
+  return subtotal;
 }
 
 double order::getTax() {
-  return getSubtotal()*0.1;
+  return tax;
 }
 
 double order::getTotal() {
-  return getSubtotal() + getTax();
+  return getSubtotal() * (1 + tax);
 }
 
-double order::balance(double amtPaid) {
-  return getTotal() - amtPaid;
+double order::balance(double paid) {
+  closed = true;
+  return getTotal() - paid;
 }

@@ -1,19 +1,21 @@
-#include "IItem.h"
+#ifndef ITEM_H
+#define ITEM_H
 #include <string>
+#include "IItem.h"
+
 
 class item : public IItem {
-  public:
-    item(){this->name=""; this->price=0.0; this->sku=0;}
-    item(std::string name, double price, int sku) {
-      this->name = name;
-      this->price = price;
-      this->sku = sku;
-    };
-  std::string getName(){return name;};
-  double getPrice(){return price;};
-  int getSKU(){return sku;};
   private:
     std::string name;
     double price;
     int sku;
+  public:
+    item();
+    item(std::string, double, int);
+  public:
+    std::string getName();
+    double getPrice();
+    int getSKU();
 };
+
+#endif
